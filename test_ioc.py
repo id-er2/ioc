@@ -34,6 +34,15 @@ class Extraction(unittest.TestCase):
         r=ioc.extract('192.0.2.1 127.0.0.1 999.0.0.1 1.2.3 192.0.2.1')
         self.assertEqual(r['indicators']['ipv4'],['127[.]0[.]0[.]1','192[.]0[.]2[.]1'])
 
+    def test_ipv4_trailing_period(self):
+        r=ioc.extract('From 192.0.2.1. Also 10.0.0.1, end')
+        self.assertEqual(r['indicators']['ipv4'],['10[.]0[.]0[.]1','192[.]0[.]2[.]1'])
+
+    def test_ipv4_trailing_period_not_longer_token(self):
+        for value in ['1.2.3.4.5','192.0.2.1.com','192.0.2.1.','x192.0.2.1']:
+            with self.subTest(value=value):
+                self.assertEqual(ioc.extract(value)['counts']['ipv4'],1 if value=='192.0.2.1.' else 0)
+
     def test_ipv6(self):
         r=ioc.extract('[2001:db8::1] ::1 2001:0db8:0:0:0:0:0:1')
         self.assertEqual(r['counts']['ipv6'],2)

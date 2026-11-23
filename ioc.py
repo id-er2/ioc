@@ -14,7 +14,7 @@ URL = re.compile(r'\b(?:https?|hxxps?)://[^\s<>"\x00-\x1f]+', re.I)
 DOMAIN_TEXT = r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:[a-z]{2,63}|xn--[a-z0-9-]{2,59})'
 DOMAIN = re.compile(r'(?<![\w@.-])' + DOMAIN_TEXT + r'(?![\w-]|\.[a-z0-9])', re.I)
 EMAIL = re.compile(r'(?<![\w.+-])[a-z0-9.!#$%&\x27*+/=?^_`{|}~-]+@' + DOMAIN_TEXT + r'(?![\w-]|\.[a-z0-9])', re.I)
-IPV4 = re.compile(r'(?<![\w.])(?:[0-9]{1,3}\.){3}[0-9]{1,3}(?![\w.])')
+IPV4 = re.compile(r'(?<![\w.])(?:[0-9]{1,3}\.){3}[0-9]{1,3}(?![\w]|\.\w)')
 IPV6 = re.compile(r'(?<![\w:])(?:[a-f0-9]{0,4}:){2,}[a-f0-9:.]*(?![\w:])', re.I)
 HASH = re.compile(r'(?<![a-z0-9])(?:[a-f0-9]{128}|[a-f0-9]{96}|[a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})(?![a-z0-9])', re.I)
 
